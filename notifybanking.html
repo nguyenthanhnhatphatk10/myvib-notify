@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THÔNG BÁO MYVIB</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/2/29/VIB_logo.svg" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f4f9ff, #ddeaff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+    h1 {
+      color: #0055a4;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    textarea {
+      width: 90%;
+      max-width: 420px;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #b5c9ff;
+      resize: none;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    button {
+      margin-top: 15px;
+      background: linear-gradient(90deg, #0055a4, #0079ff);
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,85,164,0.3);
+      transition: 0.3s;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 12px rgba(0,85,164,0.4);
+    }
+    .logo {
+      width: 90px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/2/29/VIB_logo.svg" alt="MYVIB Logo" />
+  <h1>THÔNG BÁO MYVIB</h1>
+  <textarea id="message" placeholder="Nhập nội dung thông báo...&#10;Ví dụ: Tài khoản ***1234 phát sinh +200,000đ vào 17/10/2025 09:30.&#10;Số dư: 3,870,000đ"></textarea>
+  <button onclick="sendNotification()">NHẬN THÔNG BÁO</button>
+
+  <footer>© 2025 MYVIB Notification Demo</footer>
+
+  <script>
+    async function sendNotification() {
+      const message = document.getElementById("message").value.trim() || "Không có nội dung.";
+      if (!("Notification" in window)) {
+        alert("Trình duyệt không hỗ trợ Notification API.");
+        return;
+      }
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        new Notification("🔔 THÔNG BÁO MYVIB", {
+          body: message,
+          icon: "https://upload.wikimedia.org/wikipedia/commons/2/29/VIB_logo.svg"
+        });
+      } else {
+        alert("Bạn chưa cho phép gửi thông báo.");
+      }
+    }
+  </script>
+</body>
+</html>
